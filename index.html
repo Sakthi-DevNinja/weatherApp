@@ -120,62 +120,63 @@
     <!-- <script src="./script.js"></script> -->
 
     <script>
-let API_KEY = "bde2ce3854209084866c810e09901d14";
 
-getWeatherData = (city) => {
-    const URL = 'https://api.openweathermap.org/data/2.5/weather';
-    const Full_Url = `${URL}?q=${city}&appid=${API_KEY}&units=imperial`;
-    const weatherPromise = fetch(Full_Url);
+        let API_KEY = "bde2ce3854209084866c810e09901d14";
 
-    return weatherPromise.then((response) => {
-        return response.json()
-    })
-}
+        getWeatherData = (city) => {
+            const URL = 'https://api.openweathermap.org/data/2.5/weather';
+            const Full_Url = `${URL}?q=${city}&appid=${API_KEY}&units=imperial`;
+            const weatherPromise = fetch(Full_Url);
 
-
-function searchCity(){
-    let city = document.getElementById("city").value;
-    city = (city != '') ? city : "coimbatore"; 
-
-    
-    getWeatherData(city)
-    .then((response) => {
-        showWeatherData(response);
-        console.log(response);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}
-
-searchCity("coimbatore")
+            return weatherPromise.then((response) => {
+                return response.json()
+            })
+        }
 
 
-showWeatherData = (weatherData) => {
-    document.getElementById("city-name").innerHTML = weatherData.name;
-    document.getElementById("weather-type").innerHTML = weatherData.weather[0].main;
-    document.getElementById("temp").innerHTML = weatherData.main.temp;
-    document.getElementById("mintemp").innerHTML = weatherData.main.temp_min;
-    document.getElementById("maxtemp").innerHTML = weatherData.main.temp_max;
+        function searchCity(){
+            let city = document.getElementById("city").value;
+            city = (city != '') ? city : "coimbatore"; 
 
-    
-    let wt = weatherData.weather[0].main;
-    // console.log(wt);
+            
+            getWeatherData(city)
+            .then((response) => {
+                showWeatherData(response);
+                console.log(response);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
 
-    let cloudImageUrl;
-    if(wt == 'Haze'){
-        cloudImageUrl = 'https://media.istockphoto.com/id/1439000190/photo/misty-mountain-landscape.webp?b=1&s=170667a&w=0&k=20&c=AdKhPqvG0pQzO1tYilCqNR393dbGPL2qGtkcgJHTPKE=';
-    } else if(wt == 'Clouds'){
-        cloudImageUrl = 'https://e0.pxfuel.com/wallpapers/141/330/desktop-wallpaper-cloud-background-pics-page-1-funeral-clouds.jpg';
-    } else if(wt == 'Mist'){
-        cloudImageUrl = 'https://cdn.pixabay.com/photo/2022/12/07/16/07/palm-7641522_1280.jpg';
-    }
-
-    
-    document.documentElement.style.setProperty('--cloud', `url('${cloudImageUrl}')`);
+        searchCity("coimbatore")
 
 
-}
+        showWeatherData = (weatherData) => {
+            document.getElementById("city-name").innerHTML = weatherData.name;
+            document.getElementById("weather-type").innerHTML = weatherData.weather[0].main;
+            document.getElementById("temp").innerHTML = weatherData.main.temp;
+            document.getElementById("mintemp").innerHTML = weatherData.main.temp_min;
+            document.getElementById("maxtemp").innerHTML = weatherData.main.temp_max;
+
+            
+            let wt = weatherData.weather[0].main;
+            // console.log(wt);
+
+            let cloudImageUrl;
+            if(wt == 'Haze'){
+                cloudImageUrl = 'https://media.istockphoto.com/id/1439000190/photo/misty-mountain-landscape.webp?b=1&s=170667a&w=0&k=20&c=AdKhPqvG0pQzO1tYilCqNR393dbGPL2qGtkcgJHTPKE=';
+            } else if(wt == 'Clouds'){
+                cloudImageUrl = 'https://e0.pxfuel.com/wallpapers/141/330/desktop-wallpaper-cloud-background-pics-page-1-funeral-clouds.jpg';
+            } else if(wt == 'Mist'){
+                cloudImageUrl = 'https://cdn.pixabay.com/photo/2022/12/07/16/07/palm-7641522_1280.jpg';
+            }
+
+            
+            document.documentElement.style.setProperty('--cloud', `url('${cloudImageUrl}')`);
+
+
+        }
 
     </script>
 
